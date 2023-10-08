@@ -8,17 +8,29 @@
 </head>
 <body>
 <div class="button-container">
-    <button id="holdButton">
-        <span class="fill" id="fill"></span>
-        Hold Me
-    </button>
+    <button type="submit" id="holdButton">Hold Me</button>
+    <pre>const buttonElement = document.getElementById('holdButton')
+
+const button = new TouchAndHoldButton(buttonElement, {
+    holdDuration: 1000
+})
+
+buttonElement.addEventListener('touchAndHold', () => {
+    console.log('touchAndHold event fired')
+})</pre>
 </div>
+
 <script type="module">
     import {TouchAndHoldButton} from './src/TouchAndHoldButton.js'
 
-    const button = new TouchAndHoldButton(document.getElementById('holdButton'), {
-        holdTime: 1000
+    const buttonElement = document.getElementById('holdButton')
+    const button = new TouchAndHoldButton(buttonElement, {
+        holdDuration: 1000
+    })
+    buttonElement.addEventListener('touchAndHold', () => {
+        console.log('touchAndHold event fired')
     })
 </script>
+
 </body>
 </html>
