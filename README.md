@@ -9,7 +9,7 @@
 
     const buttonElement = document.getElementById('holdButton')
     const button = new TouchAndHoldButton(buttonElement, {
-        holdDuration: 1000
+        holdDuration: 3000
     })
     buttonElement.addEventListener('touchAndHold', () => {
         console.log('touchAndHold event fired')
@@ -21,7 +21,7 @@
 
 ```javascript
 this.props = {
-    holdDuration: 1200,
+    holdDuration: 1000,
     preventDefault: true,
     fillColor: "rgba(0,0,0,0.1)"
 }

@@ -7,7 +7,7 @@
 export function TouchAndHoldButton(buttonElement, props = {}) {
 
     this.props = {
-        holdDuration: 1200,
+        holdDuration: 1000,
         preventDefault: true,
         fillColor: "rgba(0,0,0,0.1)"
     }
