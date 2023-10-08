@@ -8,11 +8,17 @@
 </head>
 <body>
 <div class="button-container">
-    <button id="holdButton" onmousedown="startHold()" onmouseup="stopHold()" ontouchstart="startHold()" ontouchend="stopHold()">
+    <button id="holdButton">
         <span class="fill" id="fill"></span>
         Hold Me
     </button>
 </div>
-<script src="src/TouchAndHoldButton.js"></script>
+<script type="module">
+    import {TouchAndHoldButton} from './src/TouchAndHoldButton.js'
+
+    const button = new TouchAndHoldButton(document.getElementById('holdButton'), {
+        holdTime: 1000
+    })
+</script>
 </body>
 </html>
