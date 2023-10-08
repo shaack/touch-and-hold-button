@@ -1,0 +1,37 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.button-container {
+  position: relative;
+  overflow: hidden;
+}
+
+button {
+  position: relative;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ddd;  /* This is the initial color of the button */
+  color: #333;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;  /* Initial state: no fill */
+  background-color: rgba(0,0,0,0.1);  /* This is the color that will fill the button */
+  z-index: 0;
+  transition: width 1s linear;  /* 3s matches our holdDuration in JS */
+}

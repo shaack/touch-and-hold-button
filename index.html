@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/touch-and-hold-button.css">
+    <title>Touch & Hold Animation</title>
+</head>
+<body>
+<div class="button-container">
+    <button id="holdButton" onmousedown="startHold()" onmouseup="stopHold()" ontouchstart="startHold()" ontouchend="stopHold()">
+        <span class="fill" id="fill"></span>
+        Hold Me
+    </button>
+</div>
+<script src="src/TouchAndHoldButton.js"></script>
+</body>
+</html>
