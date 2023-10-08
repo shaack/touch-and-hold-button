@@ -1,0 +1,20 @@
+{
+  "name": "touch-and-hold-button",
+  "version": "1.0.0",
+  "description": "Transform an HTML button to a touch-and-hold (long press) button",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaack/touch-and-hold-button.git"
+  },
+  "keywords": [
+    "js",
+    "es6",
+    "ui"
+  ],
+  "author": "shaack.com",
+  "license": "MIT"
+}

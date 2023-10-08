@@ -7,13 +7,15 @@
 export function TouchAndHoldButton(buttonElement, props = {}) {
 
     this.props = {
-        holdDuration: 1000,
-        preventDefault: true
+        holdDuration: 1200,
+        preventDefault: true,
+        fillColor: "rgba(0,0,0,0.1)"
     }
     Object.assign(this.props, props)
 
     let holdTimeout
 
+    buttonElement.style.position = "relative"
     this.fillElement = document.createElement('span')
     this.fillElement.classList.add('fill')
     this.fillElement.style.position = "absolute"
@@ -21,7 +23,7 @@ export function TouchAndHoldButton(buttonElement, props = {}) {
     this.fillElement.style.left = "0"
     this.fillElement.style.height = "100%"
     this.fillElement.style.width = "0" // Initial state: no fill
-    this.fillElement.style.backgroundColor = "rgba(0,0,0,0.1)" // This is the color that will fill the button
+    this.fillElement.style.backgroundColor = this.props.fillColor // This is the color that will fill the button
     this.fillElement.style.zIndex = "0"
     this.fillElement.style.transition = `width ${this.props.holdDuration / 1000}s linear`
     buttonElement.append(this.fillElement)
