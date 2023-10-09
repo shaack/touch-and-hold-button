@@ -3,16 +3,24 @@
 ## Usage
 
 ```html
-<button id="holdButton">Touch and hold me</button>
+<button type="submit" id="holdButton">Hold Me</button>
 <script type="module">
     import {TouchAndHoldButton} from './src/TouchAndHoldButton.js'
 
     const buttonElement = document.getElementById('holdButton')
-    const button = new TouchAndHoldButton(buttonElement, {
-        holdDuration: 3000
+    const touchAndHoldButton = new TouchAndHoldButton(buttonElement)
+
+    buttonElement.addEventListener('mousedown', () => {
+        console.log('`touchstart` event fired, confirmed:', touchAndHoldButton.confirmed())
     })
-    buttonElement.addEventListener('touchAndHold', () => {
-        console.log('touchAndHold event fired')
+    buttonElement.addEventListener('confirmed', () => {
+        console.log('`confirmed` event fired, confirmed:', touchAndHoldButton.confirmed())
+    })
+    buttonElement.addEventListener('click', () => {
+        console.log('`click` event fired, confirmed:', touchAndHoldButton.confirmed())
+        if (touchAndHoldButton.confirmed()) {
+            alert('Button was clicked and confirmed')
+        }
     })
 </script>
 ```
@@ -22,7 +30,7 @@
 ```javascript
 this.props = {
     holdDuration: 1000,
-    preventDefault: true,
-    fillColor: "rgba(0,0,0,0.1)"
+    fillColor: "rgba(0,0,0,0.1)",
+    confirmedShadow: "0 0 0 5px rgba(0,100,0,0.5)"
 }
 ```

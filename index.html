@@ -26,23 +26,22 @@
 <body>
 <h1>touch-and-hold-button demopage</h1>
 <p>This button needs to be confirmed with touch and holding it for 1 second.</p>
-<div class="button-container">
-    <button type="submit" id="holdButton">Hold Me</button>
-</div>
+<button type="submit" id="holdButton">Hold Me</button>
 <script type="module">
     import {TouchAndHoldButton} from './src/TouchAndHoldButton.js'
 
     const buttonElement = document.getElementById('holdButton')
-    const button = new TouchAndHoldButton(buttonElement)
+    const touchAndHoldButton = new TouchAndHoldButton(buttonElement)
+
     buttonElement.addEventListener('mousedown', () => {
-        console.log('`touchstart` event fired, confirmed:', button.confirmed())
+        console.log('`touchstart` event fired, confirmed:', touchAndHoldButton.confirmed())
     })
     buttonElement.addEventListener('confirmed', () => {
-        console.log('`confirmed` event fired, confirmed:', button.confirmed())
+        console.log('`confirmed` event fired, confirmed:', touchAndHoldButton.confirmed())
     })
     buttonElement.addEventListener('click', () => {
-        console.log('`click` event fired, confirmed:', button.confirmed())
-        if(button.confirmed()) {
+        console.log('`click` event fired, confirmed:', touchAndHoldButton.confirmed())
+        if (touchAndHoldButton.confirmed()) {
             alert('Button was clicked and confirmed')
         }
     })
