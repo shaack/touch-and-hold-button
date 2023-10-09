@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>touch-and-hold-button with Bootstrap example</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>touch-and-hold-button with Bootstrap example</h1>
+    <p>This button needs to be confirmed with touch and holding it for 1 second.</p>
+    <button type="submit" id="holdButton" class="btn btn-primary btn-lg">Hold Me</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+<script type="module">
+    import {TouchAndHoldButton} from '../src/TouchAndHoldButton.js'
+
+    const buttonElement = document.getElementById('holdButton')
+    const touchAndHoldButton = new TouchAndHoldButton(buttonElement, {
+        fillColor: "rgba(255, 255,255, 0.2)"
+    })
+
+    buttonElement.addEventListener('mousedown', () => {
+        console.log('`touchstart` event fired, confirmed:', touchAndHoldButton.confirmed())
+    })
+    buttonElement.addEventListener('confirmed', () => {
+        console.log('`confirmed` event fired, confirmed:', touchAndHoldButton.confirmed())
+    })
+    buttonElement.addEventListener('click', () => {
+        console.log('`click` event fired, confirmed:', touchAndHoldButton.confirmed())
+        if (touchAndHoldButton.confirmed()) {
+            alert('Button was clicked and confirmed')
+        }
+    })
+</script>
+</body>
+</html>

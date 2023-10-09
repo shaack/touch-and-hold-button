@@ -19,22 +19,14 @@ export class TouchAndHoldButton {
         let holdTimeout
 
         buttonElement.style.position = "relative"
-        this.fillElement = document.createElement('span')
-        this.fillElement.classList.add('fill')
-        this.fillElement.style.position = "absolute"
-        this.fillElement.style.top = "0"
-        this.fillElement.style.left = "0"
-        this.fillElement.style.height = "100%"
-        this.fillElement.style.width = "0" // Initial state: no fill
-        this.fillElement.style.backgroundColor = this.props.fillColor // This is the color that will fill the button
-        this.fillElement.style.zIndex = "0"
-        this.fillElement.style.transition = `width ${this.props.holdDuration / 1000}s linear`
-        buttonElement.append(this.fillElement)
 
         const startHold = () => {
             this.state.confirmed = false
             addPointerUpListener(buttonElement, stopHold)
-            this.fillElement.style.width = "100%"  // This triggers the fill effect
+            addFillElement()
+            setTimeout(() => {
+                this.fillElement.style.width = "100%"  // This triggers the fill effect
+            })
             holdTimeout = setTimeout(() => {
                 this.state.confirmed = true
                 buttonElement.style.boxShadow = this.props.confirmedShadow
@@ -45,16 +37,30 @@ export class TouchAndHoldButton {
         const stopHold = () => {
             buttonElement.removeTouchAndHoldPointerUpListener()
             clearTimeout(holdTimeout)
-            this.fillElement.style.width = "0"
-            this.fillElement.style.transition = "none" // "width 0.05s ease-in-out"  // This resets the fill effect
             buttonElement.style.boxShadow = this.state.buttonOriginalBoxShadow
-
-            setTimeout(() => {
-                this.fillElement.style.transition = `width ${this.props.holdDuration / 1000}s linear`
-            }, 50)
+            removeFillElement()
         }
 
-        function addPointerDownListener(element, callback) {
+        const addFillElement = () => {
+            this.fillElement = document.createElement('span')
+            this.fillElement.classList.add('fill')
+            this.fillElement.style.position = "absolute"
+            this.fillElement.style.top = "0"
+            this.fillElement.style.left = "0"
+            this.fillElement.style.height = "100%"
+            this.fillElement.style.width = "0" // Initial state: no fill
+            this.fillElement.style.backgroundColor = this.props.fillColor // This is the color that will fill the button
+            this.fillElement.style.zIndex = "0"
+            this.fillElement.style.transition = `width ${this.props.holdDuration / 1000}s linear`
+            console.log(`width ${this.props.holdDuration / 1000}s linear`)
+            buttonElement.append(this.fillElement)
+        }
+
+        const removeFillElement = () => {
+            this.fillElement.remove()
+        }
+
+        const addPointerDownListener = (element, callback) => {
             element.addEventListener('pointerdown', callback)
             element.addEventListener('touchstart', callback)
             element.removeTouchAndHoldPointerDownListener = () => {
@@ -63,7 +69,7 @@ export class TouchAndHoldButton {
             }
         }
 
-        function addPointerUpListener(element, callback) {
+        const addPointerUpListener = (element, callback) => {
             window.addEventListener('pointerup', callback)
             window.addEventListener('touchend', callback)
             element.removeTouchAndHoldPointerUpListener = () => {
