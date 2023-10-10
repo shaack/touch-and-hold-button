@@ -22,20 +22,15 @@
     const buttonElement = document.getElementById('holdButton')
     const touchAndHoldButton = new TouchAndHoldButton(buttonElement)
 
-    buttonElement.addEventListener('mousedown', () => {
-        console.log('`touchstart` event fired, confirmed:', touchAndHoldButton.confirmed())
-    })
     buttonElement.addEventListener('confirm', () => {
-        console.log('`confirm` event fired, confirmed:', touchAndHoldButton.confirmed())
+        console.log('`confirm` event fired.')
     })
     buttonElement.addEventListener('cancel', () => {
         console.log('`cancel` event fired.')
     })
     buttonElement.addEventListener('action', () => {
         console.log('`action` event fired.')
-        if (touchAndHoldButton.confirmed()) {
-            alert('Button confirmed action')
-        }
+        alert('Button confirmed action')
     })
 </script>
 </body>

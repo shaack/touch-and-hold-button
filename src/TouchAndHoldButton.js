@@ -40,15 +40,20 @@ export class TouchAndHoldButton {
         }
         let holdTimeout
 
+        const setButtonState = (state) => {
+            this.state.buttonState = state
+            buttonElement.dataset.state = state
+        }
+
         const startHold = (event) => {
             // console.log("startHold", event)
-            this.state.buttonState = BUTTON_STATE.holding
+            setButtonState(BUTTON_STATE.holding)
             event.preventDefault()
             addPointerUpListener(buttonElement, stopHold)
             buttonElement.style.transition = `background ${this.props.holdDuration - 10}ms linear`
             buttonElement.style.backgroundPosition = 'left'
             holdTimeout = setTimeout(() => {
-                this.state.buttonState = BUTTON_STATE.confirmed
+                setButtonState(BUTTON_STATE.confirmed)
                 buttonElement.dispatchEvent(new Event('confirm'))
             }, this.props.holdDuration)
         }
@@ -68,7 +73,7 @@ export class TouchAndHoldButton {
             buttonElement.style.backgroundPosition = "right"
             buttonElement.style.boxShadow = this.state.buttonOriginalBoxShadow
             setTimeout(() => {
-                this.state.buttonState = BUTTON_STATE.idle
+                setButtonState(BUTTON_STATE.idle)
             }, 100)
         }
 
@@ -87,9 +92,5 @@ export class TouchAndHoldButton {
         buttonElement.addEventListener("contextmenu", (event) => {
             event.preventDefault()
         })
-    }
-
-    confirmed() {
-        return this.state.buttonState === BUTTON_STATE.confirmed
     }
 }
