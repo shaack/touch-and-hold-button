@@ -49,18 +49,20 @@ export class TouchAndHoldButton {
             buttonElement.style.backgroundPosition = 'left'
             holdTimeout = setTimeout(() => {
                 this.state.buttonState = BUTTON_STATE.confirmed
-                buttonElement.dispatchEvent(new Event('confirmed'))
+                buttonElement.dispatchEvent(new Event('confirm'))
             }, this.props.holdDuration)
         }
 
         const stopHold = (event) => {
-            console.log("stopHold", event)
+            // console.log("stopHold", event)
             buttonElement.removeTouchAndHoldPointerUpListener()
             clearTimeout(holdTimeout)
             if (buttonElement.matches(":hover") && event.type === "pointerup") {
                 if(this.state.buttonState === BUTTON_STATE.confirmed) {
                     buttonElement.dispatchEvent(new Event('action'))
                 }
+            } else {
+                buttonElement.dispatchEvent(new Event('cancel'))
             }
             buttonElement.style.transition = "none"
             buttonElement.style.backgroundPosition = "right"

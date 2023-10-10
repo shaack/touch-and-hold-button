@@ -25,12 +25,17 @@
     buttonElement.addEventListener('mousedown', () => {
         console.log('`touchstart` event fired, confirmed:', touchAndHoldButton.confirmed())
     })
-    buttonElement.addEventListener('confirmed', () => {
-        console.log('`confirmed` event fired, confirmed:', touchAndHoldButton.confirmed())
+    buttonElement.addEventListener('confirm', () => {
+        console.log('`confirm` event fired, confirmed:', touchAndHoldButton.confirmed())
+    })
+    buttonElement.addEventListener('cancel', () => {
+        console.log('`cancel` event fired.')
     })
     buttonElement.addEventListener('action', () => {
-        console.log('`action` event fired, confirmed:', touchAndHoldButton.confirmed())
-        alert('Button confirmed action')
+        console.log('`action` event fired.')
+        if (touchAndHoldButton.confirmed()) {
+            alert('Button confirmed action')
+        }
     })
 </script>
 </body>
