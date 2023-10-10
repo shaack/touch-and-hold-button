@@ -47,8 +47,11 @@ export class TouchAndHoldButton {
 
         const startHold = (event) => {
             // console.log("startHold", event)
+            if(event.pointerType === "mouse" && event.button !== 0) {
+                return
+            }
+            buttonElement.dispatchEvent(new Event('hold'))
             setButtonState(BUTTON_STATE.holding)
-            event.preventDefault()
             addPointerUpListener(buttonElement, stopHold)
             buttonElement.style.transition = `background ${this.props.holdDuration - 10}ms linear`
             buttonElement.style.backgroundPosition = 'left'
@@ -62,10 +65,8 @@ export class TouchAndHoldButton {
             // console.log("stopHold", event)
             buttonElement.removeTouchAndHoldPointerUpListener()
             clearTimeout(holdTimeout)
-            if (buttonElement.matches(":hover") && event.type === "pointerup") {
-                if(this.state.buttonState === BUTTON_STATE.confirmed) {
-                    buttonElement.dispatchEvent(new Event('action'))
-                }
+            if (buttonElement.matches(":hover") && event.type === "pointerup" && this.state.buttonState === BUTTON_STATE.confirmed) {
+                buttonElement.dispatchEvent(new Event('action'))
             } else {
                 buttonElement.dispatchEvent(new Event('cancel'))
             }
@@ -87,10 +88,9 @@ export class TouchAndHoldButton {
                 element.removeEventListener('mouseleave', callback)
             }
         }
-
         buttonElement.addEventListener("pointerdown", startHold)
         buttonElement.addEventListener("contextmenu", (event) => {
-            event.preventDefault()
+            // event.preventDefault()
         })
     }
 }

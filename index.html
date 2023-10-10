@@ -33,6 +33,9 @@
     const buttonElement = document.getElementById('holdButton')
     const touchAndHoldButton = new TouchAndHoldButton(buttonElement)
 
+    buttonElement.addEventListener('hold', () => {
+        console.log('`hold` event fired.')
+    })
     buttonElement.addEventListener('confirm', () => {
         console.log('`confirm` event fired.')
     })
