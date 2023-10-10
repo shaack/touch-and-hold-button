@@ -73,9 +73,7 @@ export class TouchAndHoldButton {
             buttonElement.style.transition = "none"
             buttonElement.style.backgroundPosition = "right"
             buttonElement.style.boxShadow = this.state.buttonOriginalBoxShadow
-            setTimeout(() => {
-                setButtonState(BUTTON_STATE.idle)
-            }, 100)
+            setButtonState(BUTTON_STATE.idle)
         }
 
         const addPointerUpListener = (element, callback) => {

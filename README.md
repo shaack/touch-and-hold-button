@@ -1,5 +1,10 @@
 # Transform an HTML button to a touch-and-hold (long press) button
 
+- Prevent accidental button presses with hold confirmation
+- Works with or without Bootstrap
+
+⇨ [Demo page](https://shaack.com/projekte/touch-and-hold-button/)
+
 ## Usage
 
 ```html
@@ -10,17 +15,18 @@
     const buttonElement = document.getElementById('holdButton')
     const touchAndHoldButton = new TouchAndHoldButton(buttonElement)
 
-    buttonElement.addEventListener('mousedown', () => {
-        console.log('`touchstart` event fired, confirmed:', touchAndHoldButton.confirmed())
+    buttonElement.addEventListener('hold', () => {
+        console.log('`hold` event fired.')
     })
-    buttonElement.addEventListener('confirmed', () => {
-        console.log('`confirmed` event fired, confirmed:', touchAndHoldButton.confirmed())
+    buttonElement.addEventListener('confirm', () => {
+        console.log('`confirm` event fired.')
     })
-    buttonElement.addEventListener('click', () => {
-        console.log('`click` event fired, confirmed:', touchAndHoldButton.confirmed())
-        if (touchAndHoldButton.confirmed()) {
-            alert('Button was clicked and confirmed')
-        }
+    buttonElement.addEventListener('cancel', () => {
+        console.log('`cancel` event fired.')
+    })
+    buttonElement.addEventListener('action', () => {
+        console.log('`action` event fired.')
+        alert('Button confirmed action')
     })
 </script>
 ```

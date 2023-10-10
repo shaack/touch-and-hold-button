@@ -10,23 +10,18 @@
         }
 
         button {
-            padding: 20px 40px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ddd;
-            color: #333;
-            font-size: 18px;
-            cursor: pointer;
-            outline: none;
-            z-index: 1;
-            overflow: hidden;
+            padding: 10px 40px;
+        }
+        button[data-state='confirmed'] {
+            box-shadow: 0 0 3px 3px green;
         }
     </style>
 </head>
 <body style="height: 10000px">
 <h1>touch-and-hold-button demopage</h1>
-<p>This button needs to be confirmed with touch and holding it.</p>
+<p>This button needs to be confirmed by holding it.</p>
 <button type="submit" id="holdButton">Hold Me</button>
+<p><a href="examples/bootstrap.html">Demo page with Bootstrap</a></p>
 <script type="module">
     import {TouchAndHoldButton} from './src/TouchAndHoldButton.js'
 
