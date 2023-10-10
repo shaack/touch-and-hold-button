@@ -20,9 +20,7 @@
     import {TouchAndHoldButton} from '../src/TouchAndHoldButton.js'
 
     const buttonElement = document.getElementById('holdButton')
-    const touchAndHoldButton = new TouchAndHoldButton(buttonElement, {
-        fillColor: "rgba(255, 255,255, 0.2)"
-    })
+    const touchAndHoldButton = new TouchAndHoldButton(buttonElement)
 
     buttonElement.addEventListener('mousedown', () => {
         console.log('`touchstart` event fired, confirmed:', touchAndHoldButton.confirmed())
