@@ -3,18 +3,25 @@
  * Repository: https://github.com/shaack/cm-chessboard
  * License: MIT, see file 'LICENSE'
  */
+export const BUTTON_STATE = {
+    idle: "idle",
+    holding: "holding",
+    confirmed: "confirmed"
+}
+
 export class TouchAndHoldButton {
 
     constructor(buttonElement, props = {}) {
         this.props = {
-            holdDuration: 1000,
+            holdDuration: 800,
             fillColor: "auto",
-            backgroundColor: "auto",
-            confirmedShadow: "0 0 0 5px rgba(0,255,0,0.5)"
+            backgroundColor: "auto"
         }
         Object.assign(this.props, props)
 
         buttonElement.style.transition = "none"
+        buttonElement.style.webkitUserSelect = "none"
+        buttonElement.style.userSelect = "none"
 
         if (this.props.backgroundColor === "auto") {
             this.props.backgroundColor = getComputedStyle(buttonElement).backgroundColor
@@ -28,52 +35,59 @@ export class TouchAndHoldButton {
         }
         buttonElement.style.background = `linear-gradient(to right, ${this.props.fillColor} 50%, ${this.props.backgroundColor} 50%) right / 200% no-repeat`
         this.state = {
-            confirmed: false,
+            buttonState: BUTTON_STATE.idle,
             buttonOriginalBoxShadow: buttonElement.style.boxShadow
         }
         let holdTimeout
 
-        const startHold = () => {
-            this.state.confirmed = false
+        const startHold = (event) => {
+            // console.log("startHold", event)
+            this.state.buttonState = BUTTON_STATE.holding
+            event.preventDefault()
             addPointerUpListener(buttonElement, stopHold)
-            buttonElement.style.transition = `background ${this.props.holdDuration}ms linear`
+            buttonElement.style.transition = `background ${this.props.holdDuration - 10}ms linear`
             buttonElement.style.backgroundPosition = 'left'
             holdTimeout = setTimeout(() => {
-                this.state.confirmed = true
-                buttonElement.style.boxShadow = this.props.confirmedShadow
+                this.state.buttonState = BUTTON_STATE.confirmed
                 buttonElement.dispatchEvent(new Event('confirmed'))
             }, this.props.holdDuration)
         }
 
-        const stopHold = () => {
+        const stopHold = (event) => {
+            console.log("stopHold", event)
             buttonElement.removeTouchAndHoldPointerUpListener()
             clearTimeout(holdTimeout)
+            if (buttonElement.matches(":hover") && event.type === "pointerup") {
+                if(this.state.buttonState === BUTTON_STATE.confirmed) {
+                    buttonElement.dispatchEvent(new Event('action'))
+                }
+            }
             buttonElement.style.transition = "none"
             buttonElement.style.backgroundPosition = "right"
             buttonElement.style.boxShadow = this.state.buttonOriginalBoxShadow
-        }
-
-        const addPointerDownListener = (element, callback) => {
-            element.addEventListener('pointerdown', callback)
-            element.addEventListener('touchstart', callback)
-            element.removeTouchAndHoldPointerDownListener = () => {
-                element.removeEventListener('pointerdown', callback)
-                element.removeEventListener('touchstart', callback)
-            }
+            setTimeout(() => {
+                this.state.buttonState = BUTTON_STATE.idle
+            }, 100)
         }
 
         const addPointerUpListener = (element, callback) => {
             window.addEventListener('pointerup', callback)
-            window.addEventListener('touchend', callback)
+            window.addEventListener('pointercancel', callback)
+            element.addEventListener('mouseleave', callback)
             element.removeTouchAndHoldPointerUpListener = () => {
                 window.removeEventListener('pointerup', callback)
-                window.removeEventListener('touchend', callback)
+                window.removeEventListener('pointercancel', callback)
+                element.removeEventListener('mouseleave', callback)
             }
         }
-        addPointerDownListener(buttonElement, startHold)
+
+        buttonElement.addEventListener("pointerdown", startHold)
+        buttonElement.addEventListener("contextmenu", (event) => {
+            event.preventDefault()
+        })
     }
 
     confirmed() {
-        return this.state.confirmed
+        return this.state.buttonState === BUTTON_STATE.confirmed
     }
 }

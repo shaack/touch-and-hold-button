@@ -28,11 +28,9 @@
     buttonElement.addEventListener('confirmed', () => {
         console.log('`confirmed` event fired, confirmed:', touchAndHoldButton.confirmed())
     })
-    buttonElement.addEventListener('click', () => {
-        console.log('`click` event fired, confirmed:', touchAndHoldButton.confirmed())
-        if (touchAndHoldButton.confirmed()) {
-            alert('Button was clicked and confirmed')
-        }
+    buttonElement.addEventListener('action', () => {
+        console.log('`action` event fired, confirmed:', touchAndHoldButton.confirmed())
+        alert('Button confirmed action')
     })
 </script>
 </body>
