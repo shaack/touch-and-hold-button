@@ -1,6 +1,6 @@
 {
   "name": "touch-and-hold-button",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Transform an HTML button to a touch-and-hold (long press) button",
   "main": "index.js",
   "scripts": {
