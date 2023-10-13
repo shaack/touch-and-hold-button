@@ -34,6 +34,7 @@ export class TouchAndHoldButton {
             }
         }
         buttonElement.style.background = `linear-gradient(to right, ${this.props.fillColor} 50%, ${this.props.backgroundColor} 50%) right / 200% no-repeat`
+        buttonElement.classList.add("touch-and-hold-button")
         this.state = {
             buttonState: BUTTON_STATE.idle,
             buttonOriginalBoxShadow: buttonElement.style.boxShadow
