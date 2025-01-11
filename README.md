@@ -47,7 +47,7 @@ this.props = {
 }
 ```
 
-## More modules
+---
 
-Find more high quality modules
-on [my projects page](https://shaack.com/works).
+Find more high quality modules from [shaack.com](https://shaack.com)
+on [our projects page](https://shaack.com/works).
