@@ -46,3 +46,8 @@ this.props = {
     confirmedShadow: "0 0 0 5px rgba(0,100,0,0.5)"
 }
 ```
+
+## More modules
+
+Find more high quality modules
+on [my projects page](https://shaack.com/works).
