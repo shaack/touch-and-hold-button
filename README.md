@@ -1,9 +1,15 @@
-# Transform an HTML button to a touch-and-hold (long press) button
+# touch-and-hold-button
 
-- Prevent accidental button presses with hold confirmation
+Transform a HTML button to a touch-and-hold (long press) button.
+
+- Prevent accidental button press with hold confirmation
 - Works with or without Bootstrap
 
-⇨ [Demo page](https://shaack.com/projekte/touch-and-hold-button/)
+## References
+
+- [Demo page](https://shaack.com/projekte/touch-and-hold-button/)
+- [GitHub repository](https://github.com/shaack/touch-and-hold-button)
+- [npm package](https://www.npmjs.com/package/touch-and-hold-button)
 
 ## Usage
 
